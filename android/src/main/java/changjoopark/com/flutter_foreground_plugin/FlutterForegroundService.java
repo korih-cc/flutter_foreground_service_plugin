@@ -43,11 +43,16 @@ public class FlutterForegroundService extends Service {
                         notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
                 Bundle bundle = intent.getExtras();
+                String channelId = bundle.getString("channel_id");
+                String channelName = bundle.getString("channel_name");
+                String channelDescription = bundle.getString("channel_description");
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
-                            "flutter_foreground_service_channel",
-                            NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationChannel channel = new NotificationChannel(channelId,
+                            channelName,
+                            NotificationManager.IMPORTANCE_HIGH,
+                            );
+                    channel.description = channelDescription;
 
                     ((NotificationManager) getSystemService(NOTIFICATION_SERVICE))
                             .createNotificationChannel(channel);

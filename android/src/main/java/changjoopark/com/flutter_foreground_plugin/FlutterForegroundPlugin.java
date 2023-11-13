@@ -72,6 +72,10 @@ public class FlutterForegroundPlugin implements FlutterPlugin, MethodCallHandler
         switch (call.method) {
             case "startForegroundService":
                 final Boolean holdWakeLock = call.argument("holdWakeLock");
+                final String channelId = call.argument("channel_id");
+                final String channelName = call.argument("channel_name");
+                final String channelDescription = call.argument("channel_description");
+                final String description = call.argument("description");
                 final String icon = call.argument("icon");
                 final int color = call.argument("color");
                 final String title = call.argument("title");
@@ -82,7 +86,7 @@ public class FlutterForegroundPlugin implements FlutterPlugin, MethodCallHandler
                 final String stopIcon = call.argument("stop_icon");
                 final String stopText = call.argument("stop_text");
 
-                launchForegroundService(icon, color, title, content, subtext, chronometer, stopAction, stopIcon, stopText);
+                launchForegroundService(channelId, channelName, channelDescription, icon, color, title, content, subtext, chronometer, stopAction, stopIcon, stopText);
                 result.success("startForegroundService");
                 break;
             case "stopForegroundService":
@@ -116,11 +120,15 @@ public class FlutterForegroundPlugin implements FlutterPlugin, MethodCallHandler
         }
     }
 
-    private void launchForegroundService(String icon, int color, String title, String content, String subtext,
+    private void launchForegroundService(String channelId, String channelName, String channelDescription,
+                                         String icon, int color, String title, String content, String subtext,
                                          Boolean chronometer, Boolean stopAction, String stopIcon,
                                          String stopText) {
         Intent intent = new Intent(context, FlutterForegroundService.class);
         intent.setAction(START_FOREGROUND_ACTION);
+        intent.putExtra("channel_id", channelId);
+        intent.putExtra("channel_name", channelName);
+        intent.putExtra("channel_description", channelDescription);
         intent.putExtra("icon", icon);
         intent.putExtra("color", color);
         intent.putExtra("title", title);
