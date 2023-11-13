@@ -50,8 +50,7 @@ public class FlutterForegroundService extends Service {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     NotificationChannel channel = new NotificationChannel(channelId,
                             channelName,
-                            NotificationManager.IMPORTANCE_HIGH,
-                            );
+                            NotificationManager.IMPORTANCE_HIGH);
                     channel.description = channelDescription;
 
                     ((NotificationManager) getSystemService(NOTIFICATION_SERVICE))
