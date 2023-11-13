@@ -59,6 +59,9 @@ void startForegroundService() async {
   await FlutterForegroundPlugin.setServiceMethodInterval(seconds: 5);
   await FlutterForegroundPlugin.setServiceMethod(globalForegroundService);
   await FlutterForegroundPlugin.startForegroundService(
+    channelId: 'sample',
+    channelName: 'Sample Name',
+    channelDescription: 'Sample Description',
     holdWakeLock: false,
     onStarted: () {
       print("Foreground on Started");
