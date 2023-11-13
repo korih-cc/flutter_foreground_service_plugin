@@ -51,7 +51,7 @@ public class FlutterForegroundService extends Service {
                     NotificationChannel channel = new NotificationChannel(channelId,
                             channelName,
                             NotificationManager.IMPORTANCE_HIGH);
-                    channel.description = channelDescription;
+                    channel.setDescription(channelDescription);
 
                     ((NotificationManager) getSystemService(NOTIFICATION_SERVICE))
                             .createNotificationChannel(channel);
